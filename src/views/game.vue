@@ -1,6 +1,8 @@
 <template>
   <div class="pan">
-      <my-square :num="num"></my-square>
+    <div v-for="(arr,ind) of num" :key="ind">
+      <my-square :num="value" v-for="(value,index) of arr" :key="index"></my-square>
+    </div>
   </div>
 </template>
 <script>
@@ -8,7 +10,7 @@ import Square from "../components/square";
 export default {
   data() {
     return {
-      num
+      num:[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
     };
   },
   components: {
