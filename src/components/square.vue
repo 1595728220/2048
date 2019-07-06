@@ -33,5 +33,6 @@ export default {
         border-radius: 5px;
         line-height: 100px;
         font-size:40px;
+        transition:all .5s;
     }
 </style>

@@ -60,8 +60,8 @@ export default {
       let tmpNum = this.num;
       //遍历数组
       for (let j = 0; j < this.MAXLEN; j++) {
+        let count = 0
         for (let i = 1; i < this.MAXLEN; i++) {
-          let count = 0
           //找到某列第一行不为0的行
           if (tmpNum[i][j] !== 0) {
             //遍历之前的下标
@@ -90,10 +90,10 @@ export default {
       let tmpNum = this.num;
       //遍历数组
       for (let j = 0; j < this.MAXLEN; j++) {
+        let count = 0
         for (let i = this.MAXLEN - 2; i >= 0; i--) {
           //找到某列最后一行不为0的行
           console.log(tmpNum[i]);
-          let count = 0
           if (tmpNum[i][j] !== 0) {
             // console.log(1)
             //遍历之前的下标
@@ -122,10 +122,10 @@ export default {
       //遍历数组
       for (let i = 0; i < this.MAXLEN; i++) {
         console.log(1);
+          let count = 0;
         for (let j = 1; j < this.MAXLEN; j++) {
           //找到某行最后一列不为0的列
           console.log(2);
-          let count = 0;
           if (tmpNum[i][j] !== 0) {
             //遍历之前的下标
             console.log(3);
@@ -153,11 +153,11 @@ export default {
       let tmpNum = this.num;
       //遍历数组
       for (let i = 0; i < this.MAXLEN; i++) {
+        let count = 0;
         for (let j = this.MAXLEN - 2; j >= 0; j--) {
           //找到某列最后一行不为0的行
           if (tmpNum[i][j] !== 0) {
             // console.log(1)
-            let count = 0;
             //遍历之前的下标
             for (let k = j + 1; k < this.MAXLEN; k++) {
               //如果后面有0
