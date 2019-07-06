@@ -40,6 +40,15 @@ export default {
         case "ArrowUp":
           this.squareUp();
           break;
+        case "ArrowDown":
+          this.squareDown();
+          break;
+        case "ArrowLeft":
+          this.squareLeft();
+          break;
+        case "ArrowRight":
+          this.squareRight();
+          break;
         default:
           console.log("请输入方向键");
       }
@@ -52,20 +61,119 @@ export default {
       //遍历数组
       for (let j = 0; j < this.MAXLEN; j++) {
         for (let i = 1; i < this.MAXLEN; i++) {
+          let count = 0
           //找到某列第一行不为0的行
           if (tmpNum[i][j] !== 0) {
-            //如果前面有0
-            if (tmpNum[i - 1][j] === 0) {
-              //交换位置
-              [tmpNum[i - 1][j], tmpNum[i][j]] = [
-                tmpNum[i][j],
-                tmpNum[i - 1][j]
-              ];
+            //遍历之前的下标
+            for (let k = i - 1; k >= 0; k--) {
+              //如果前面有0
+              if (tmpNum[k][j] === 0) {
+                //交换位置
+                [tmpNum[k][j], tmpNum[k + 1][j]] = [
+                  tmpNum[k + 1][j],
+                  tmpNum[k][j]
+                ];
+              }
+              //如果前面有相同的数字，相加原位置清0
+              else if (tmpNum[k+1][j] === tmpNum[k][j] && count === 0) {
+                count++
+                tmpNum[k][j] *= 2;
+                tmpNum[k+1][j] = 0;
+              }
             }
-            //如果前面有相同的数字，相加原位置清0
-            else if (tmpNum[i][j] === tmpNum[i - 1][j]) {
-              tmpNum[i - 1][j] *= 2;
-              tmpNum[i][j] = 0;
+          }
+        }
+      }
+    },
+    //按下下键触发的向下滑动事件
+    squareDown() {
+      let tmpNum = this.num;
+      //遍历数组
+      for (let j = 0; j < this.MAXLEN; j++) {
+        for (let i = this.MAXLEN - 2; i >= 0; i--) {
+          //找到某列最后一行不为0的行
+          console.log(tmpNum[i]);
+          let count = 0
+          if (tmpNum[i][j] !== 0) {
+            // console.log(1)
+            //遍历之前的下标
+            for (let k = i + 1; k < this.MAXLEN; k++) {
+              //如果后面有0
+              if (tmpNum[k][j] === 0) {
+                //交换位置
+                [tmpNum[k][j], tmpNum[k - 1][j]] = [
+                  tmpNum[k - 1][j],
+                  tmpNum[k][j]
+                ];
+              }
+              //如果前面有相同的数字，相加原位置清0
+              else if (tmpNum[k-1][j] === tmpNum[k][j] && count === 0) {
+                count++
+                tmpNum[k][j] *= 2;
+                tmpNum[k-1][j] = 0;
+              }
+            }
+          }
+        }
+      }
+    },
+    squareLeft() {
+      let tmpNum = this.num;
+      //遍历数组
+      for (let i = 0; i < this.MAXLEN; i++) {
+        console.log(1);
+        for (let j = 1; j < this.MAXLEN; j++) {
+          //找到某行最后一列不为0的列
+          console.log(2);
+          let count = 0;
+          if (tmpNum[i][j] !== 0) {
+            //遍历之前的下标
+            console.log(3);
+            for (let k = j - 1; k >= 0; k--) {
+              //如果前面有0
+              if (tmpNum[i][k] === 0) {
+                //交换位置
+                [tmpNum[i][k], tmpNum[i][k + 1]] = [
+                  tmpNum[i][k + 1],
+                  tmpNum[i][k]
+                ];
+              }
+              //如果前面有相同的数字，相加原位置清0
+              else if (tmpNum[i][k+1] === tmpNum[i][k] && count ===0) {
+                count++
+                tmpNum[i][k] *= 2;
+                tmpNum[i][k+1] = 0;
+              }
+            }
+          }
+        }
+      }
+    },
+    squareRight() {
+      let tmpNum = this.num;
+      //遍历数组
+      for (let i = 0; i < this.MAXLEN; i++) {
+        for (let j = this.MAXLEN - 2; j >= 0; j--) {
+          //找到某列最后一行不为0的行
+          if (tmpNum[i][j] !== 0) {
+            // console.log(1)
+            let count = 0;
+            //遍历之前的下标
+            for (let k = j + 1; k < this.MAXLEN; k++) {
+              //如果后面有0
+              if (tmpNum[i][k] === 0) {
+                //交换位置
+                [tmpNum[i][k], tmpNum[i][k - 1]] = [
+                  tmpNum[i][k - 1],
+                  tmpNum[i][k]
+                ];
+              }
+              //如果前面有相同的数字，相加原位置清0
+              else if (tmpNum[i][k - 1] === tmpNum[i][k] && count === 0) {
+                count++;
+                tmpNum[i][k] *= 2;
+                tmpNum[i][k - 1] = 0;
+              }
             }
           }
         }
@@ -183,7 +291,8 @@ export default {
     position: absolute;
     width: 100%;
     height: 100%;
-    div,button {
+    div,
+    button {
       padding: 20px;
       background: khaki;
       color: #fff;
@@ -196,9 +305,9 @@ export default {
       outline: none;
       border-radius: 5px;
     }
-    div{
-      background:#f33;
-      border:1px solid #f33;
+    div {
+      background: #f33;
+      border: 1px solid #f33;
     }
   }
 }
